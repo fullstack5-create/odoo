@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_wa" model="ir.ui.view">
+        <field name="name">res.company.form.whatsapp</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="WhatsApp Cloud API" name="whatsapp_cloud">
+                    <group>
+                        <field name="wa_phone_number_id"/>
+                        <field name="wa_access_token" password="True"/>
+                        <field name="wa_api_version"/>
+                    </group>
+                    <div class="text-muted">
+                        Meta Cloud API. El texto libre solo entrega dentro de la ventana de 24h;
+                        fuera de ella usa una plantilla aprobada.
+                    </div>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>
