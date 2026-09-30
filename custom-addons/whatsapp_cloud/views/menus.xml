@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_wa_compose" model="ir.actions.act_window">
+        <field name="name">Enviar WhatsApp</field>
+        <field name="res_model">wa.compose</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- visible under Contacts so it is easy to find; config stays on the company form -->
+    <menuitem id="menu_wa_send" name="Enviar WhatsApp"
+              parent="contacts.menu_contacts" action="action_wa_compose" sequence="90"/>
+</odoo>
