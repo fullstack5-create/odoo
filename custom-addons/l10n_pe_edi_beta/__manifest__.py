@@ -23,7 +23,6 @@ generado al vuelo y usuario SOL de Beta (MODDATOS / moddatos).
         'python': ['signxml', 'lxml', 'cryptography', 'requests'],
     },
     'data': [
-        'security/ir.model.access.csv',
         'views/res_company_views.xml',
         'views/account_move_views.xml',
     ],

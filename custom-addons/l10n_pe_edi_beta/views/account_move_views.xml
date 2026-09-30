@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_l10n_pe_edi" model="ir.ui.view">
+        <field name="name">account.move.form.l10n.pe.edi</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_l10n_pe_edi_send" type="object"
+                        string="Enviar a SUNAT" class="btn-primary"
+                        invisible="state != 'posted' or move_type not in ('out_invoice','out_refund') or country_code != 'PE'"/>
+                <field name="l10n_pe_edi_state" widget="badge" optional="show"
+                       invisible="not l10n_pe_edi_state"
+                       decoration-success="l10n_pe_edi_state == 'accepted'"
+                       decoration-danger="l10n_pe_edi_state in ('rejected','error')"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="SUNAT" name="l10n_pe_edi"
+                      invisible="country_code != 'PE' or move_type not in ('out_invoice','out_refund')">
+                    <group>
+                        <field name="l10n_pe_edi_state"/>
+                        <field name="l10n_pe_edi_xml" filename="l10n_pe_edi_xml_filename"/>
+                        <field name="l10n_pe_edi_xml_filename" invisible="1"/>
+                        <field name="l10n_pe_edi_cdr" filename="l10n_pe_edi_cdr_filename"/>
+                        <field name="l10n_pe_edi_cdr_filename" invisible="1"/>
+                    </group>
+                    <field name="l10n_pe_edi_message" readonly="1"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

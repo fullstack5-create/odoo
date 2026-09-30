@@ -57,13 +57,15 @@ def sign_document(root, key_pem, cert_pem):
 
     `root` must already contain an empty ExtensionContent placeholder.
     """
+    # SUNAT accepts SHA-256; signxml blocks SHA-1 by default as insecure
     signer = XMLSigner(method=methods.enveloped,
-                       signature_algorithm='rsa-sha1',
-                       digest_algorithm='sha1',
+                       signature_algorithm='rsa-sha256',
+                       digest_algorithm='sha256',
                        c14n_algorithm=C14N)
     # keep only ds namespace prefix on the Signature
     signer.namespaces = {'ds': DS}
-    signed_root = signer.sign(root, key=key_pem, cert=cert_pem, reference_uri='')
+    # default enveloped reference is URI="" (whole document), which SUNAT expects
+    signed_root = signer.sign(root, key=key_pem, cert=cert_pem)
 
     signature = signed_root.find('{%s}Signature' % DS)
     if signature is None:
